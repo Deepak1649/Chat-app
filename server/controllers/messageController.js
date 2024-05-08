@@ -24,7 +24,6 @@ module.exports.getMessages = async (req, res, next) => {
 
 module.exports.addMessage = async (req, res, next) => {
   try {
-    console.log("control comes under addMsg ap!!!!!!!!!!!!!!!");
     const { from, to, message } = req.body;
     const data = await Messages.create({
       message: { text: message },
