@@ -35,6 +35,7 @@ export default function Register() {
 
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (password !== confirmPassword) {
       toast.error(
         "Password and confirm password should be same.",
@@ -47,11 +48,8 @@ export default function Register() {
         toastOptions
       );
       return false;
-    } else if (password.length < 8) {
-      toast.error(
-        "Password should be equal or greater than 8 characters.",
-        toastOptions
-      );
+    } else if (!passwordRegex.test(password)) {
+      toast.error("Password must contain at least one uppercase letter, one lowercase letter, one special character, and be at least 8 characters long.", toastOptions);
       return false;
     } else if (email === "") {
       toast.error("Email is required.", toastOptions);
